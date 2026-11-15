@@ -16,8 +16,20 @@ public class Main {
         graph.addEdge("Chicago", "Denver", 15);
         graph.addEdge("Denver", "Los Angeles", 20);
         graph.addEdge("Los Angeles", "Seattle", 12);
-        graph.addEdge("New York", "Miami", 25);
+
+        // Miami is intentionally disconnected for BFS testing
 
         graph.displayGraph();
+
+        System.out.println("\nBFS Connectivity Tests:");
+
+        System.out.println("New York to Los Angeles: "
+                + graph.bfs("New York", "Los Angeles"));
+
+        System.out.println("New York to Miami: "
+                + graph.bfs("New York", "Miami"));
+
+        System.out.println("Chicago to Seattle: "
+                + graph.bfs("Chicago", "Seattle"));
     }
 }

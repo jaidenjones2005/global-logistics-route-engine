@@ -1,6 +1,8 @@
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class WeightedGraph<T> {
 
@@ -65,5 +67,42 @@ public class WeightedGraph<T> {
 
             System.out.println();
         }
+    }
+
+    // Phase 2: Breadth-First Search using a Queue
+    public boolean bfs(T startVertex, T endVertex) {
+
+        int startIndex = vertices.indexOf(startVertex);
+        int endIndex = vertices.indexOf(endVertex);
+
+        if (startIndex == -1 || endIndex == -1) {
+            throw new IllegalArgumentException(
+                    "One or both cities do not exist.");
+        }
+
+        boolean[] visited = new boolean[vertices.size()];
+        Queue<Integer> queue = new LinkedList<>();
+
+        queue.add(startIndex);
+        visited[startIndex] = true;
+
+        while (!queue.isEmpty()) {
+            int current = queue.poll();
+
+            if (current == endIndex) {
+                return true;
+            }
+
+            for (int i = 0; i < vertices.size(); i++) {
+                if (adjacencyMatrix[current][i] != -1
+                        && !visited[i]) {
+
+                    visited[i] = true;
+                    queue.add(i);
+                }
+            }
+        }
+
+        return false;
     }
 }
