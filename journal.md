@@ -30,3 +30,21 @@ This means BFS checks the closest neighboring cities before moving farther throu
 
 I learned how the Queue and visited array work together to prevent the algorithm from repeatedly exploring the same cities.
 
+## Phase 3: Path Exploration (DFS)
+
+### What I Accomplished
+
+In this phase, I implemented Depth-First Search (DFS) using a Stack to check whether two cities are connected in the delivery network.
+
+I tested DFS using the same cities as BFS and compared the results. Both algorithms correctly identified connected and disconnected cities.
+
+### Reflection
+
+The main difference between BFS and DFS is the data structure used to explore the graph.
+
+BFS uses a Queue, which follows First-In, First-Out (FIFO). This allows it to explore nearby cities before moving farther away.
+
+DFS uses a Stack, which follows Last-In, First-Out (LIFO). This causes it to explore deeper paths before returning to other possible routes.
+
+I learned that both algorithms can determine whether a route exists, but they explore the graph in different orders.
+
