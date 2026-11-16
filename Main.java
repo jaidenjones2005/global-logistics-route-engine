@@ -3,6 +3,9 @@ public class Main {
 
     public static void main(String[] args) {
 
+        // Test 1: Original delivery network
+        System.out.println("=== TEST 1: DELIVERY NETWORK ===");
+
         WeightedGraph<String> graph = new WeightedGraph<>(6);
 
         graph.addVertex("New York");
@@ -17,28 +20,61 @@ public class Main {
         graph.addEdge("Denver", "Los Angeles", 20);
         graph.addEdge("Los Angeles", "Seattle", 12);
 
-        // Miami is intentionally disconnected
-
         graph.displayGraph();
 
-        System.out.println("\nBFS vs DFS Connectivity Tests:");
+        testConnection(graph, "New York", "Los Angeles");
+        testConnection(graph, "New York", "Miami");
+        testConnection(graph, "Chicago", "Seattle");
+        testConnection(graph, "Miami", "Seattle");
+        testConnection(graph, "Denver", "Denver");
 
-        System.out.println("\nNew York to Los Angeles:");
-        System.out.println("BFS: "
-                + graph.bfs("New York", "Los Angeles"));
-        System.out.println("DFS: "
-                + graph.dfs("New York", "Los Angeles"));
+        // Test 2: Only two connected cities
+        System.out.println("\n=== TEST 2: TWO CITIES ===");
 
-        System.out.println("\nNew York to Miami:");
-        System.out.println("BFS: "
-                + graph.bfs("New York", "Miami"));
-        System.out.println("DFS: "
-                + graph.dfs("New York", "Miami"));
+        WeightedGraph<String> smallGraph = new WeightedGraph<>(2);
 
-        System.out.println("\nChicago to Seattle:");
-        System.out.println("BFS: "
-                + graph.bfs("Chicago", "Seattle"));
-        System.out.println("DFS: "
-                + graph.dfs("Chicago", "Seattle"));
+        smallGraph.addVertex("Dallas");
+        smallGraph.addVertex("Houston");
+
+        smallGraph.addEdge("Dallas", "Houston", 5);
+
+        smallGraph.displayGraph();
+
+        testConnection(smallGraph, "Dallas", "Houston");
+        testConnection(smallGraph, "Houston", "Dallas");
+
+        // Test 3: Multiple possible paths
+        System.out.println("\n=== TEST 3: MULTIPLE PATHS ===");
+
+        WeightedGraph<String> pathGraph = new WeightedGraph<>(5);
+
+        pathGraph.addVertex("A");
+        pathGraph.addVertex("B");
+        pathGraph.addVertex("C");
+        pathGraph.addVertex("D");
+        pathGraph.addVertex("E");
+
+        pathGraph.addEdge("A", "B", 2);
+        pathGraph.addEdge("B", "C", 3);
+        pathGraph.addEdge("C", "D", 4);
+        pathGraph.addEdge("A", "D", 10);
+        pathGraph.addEdge("D", "E", 5);
+
+        pathGraph.displayGraph();
+
+        testConnection(pathGraph, "A", "E");
+        testConnection(pathGraph, "B", "E");
+
+        System.out.println("\n=== ALL TESTS COMPLETED ===");
+    }
+
+    public static void testConnection(
+            WeightedGraph<String> graph,
+            String start,
+            String end) {
+
+        System.out.println("\n" + start + " to " + end);
+        System.out.println("BFS: " + graph.bfs(start, end));
+        System.out.println("DFS: " + graph.dfs(start, end));
     }
 }
